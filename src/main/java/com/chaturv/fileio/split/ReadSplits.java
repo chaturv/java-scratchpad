@@ -12,6 +12,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * reads splits and produces a new file called destName
+ */
 public class ReadSplits {
 
     public void readSplits(List<String> splitNames, String destName) throws IOException {
@@ -33,10 +36,10 @@ public class ReadSplits {
     public static void main(String[] args) throws IOException {
         List<String> splitNames = new ArrayList<String>();
         for (int i = 0; i < 12; i++) {
-            splitNames.add("C:/Work/data/Five-C-s-of-Cinematography.pdf-" + i);
+            splitNames.add("C:/Work/data/upload/Five-C-s-of-Cinematography_pdf-" + i);
         }
 
-        new ReadSplits().readSplits(splitNames, "C:/Work/data/Five-C-s-of-Cinematography_copy.pdf");
+        new ReadSplits().readSplits(splitNames, "C:/Work/data/upload/Five-C-s-of-Cinematography_copy.pdf");
     }
 }
 
