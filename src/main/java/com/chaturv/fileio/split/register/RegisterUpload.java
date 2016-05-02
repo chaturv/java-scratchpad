@@ -21,17 +21,21 @@ public class RegisterUpload {
     RestTemplate template;
 
     private RegisterUpload() {
-        this.privateKey = readPrivateKey();
+//        this.privateKey = readPrivateKey();
         this.template = new RestTemplate();
     }
 
-    public RegistrationStatus register() {
-        String url = "http://localhost/registerUpload?encrypted=%s"; //TODO: from a central place. set %s
+    public RegistrationStatus register(String fileName) {
+        String url = "http://localhost:8080/registerUpload?fileName=%s"; //TODO: send string encrypted with private key
 
         String random = UUID.randomUUID().toString();
         String encrypted = ""; //TODO: encrypt using private key
 
-        return template.getForObject(url, RegistrationStatus.class);
+        url = String.format(url, fileName);
+        RegistrationStatus status = template.getForObject(url, RegistrationStatus.class);
+        System.out.println(status);
+
+        return status;
     }
 
 
@@ -59,5 +63,9 @@ public class RegisterUpload {
             }
             return instance;
         }
+    }
+
+    public static void main(String[] args) {
+        RegisterUpload.get().register("Five-C-s-of-Cinematography.pdf");
     }
 }

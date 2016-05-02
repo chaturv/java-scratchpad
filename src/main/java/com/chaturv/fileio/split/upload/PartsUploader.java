@@ -17,7 +17,7 @@ import java.util.UUID;
 
 public class PartsUploader {
 
-    private String URL_TEMPLATE = "http://localhost:8080/upload/{uploadID}/{name}";
+    private String URL_TEMPLATE = "http://localhost:8080/upload?uploadID=%s&fileName=%s";
 
     private RestTemplate template;
 
@@ -34,14 +34,13 @@ public class PartsUploader {
 
     public void uploadParts(List<Path> paths, String uploadId) {
         for (Path path : paths) {
-            //replace . by _
             String fileName = path.getFileName().toString();
-            String replace = fileName.replace('.', '_');
 
             MultiValueMap<String, Object> parts = new LinkedMultiValueMap<>();
             parts.add("file", new FileSystemResource(path.toFile()));
 
-            UploadStatus status = template.postForObject(URL_TEMPLATE, parts, UploadStatus.class, uploadId, replace);
+            String url = String.format(URL_TEMPLATE, uploadId, fileName);
+            UploadStatus status = template.postForObject(url, parts, UploadStatus.class);
 
             System.out.println(status);
         }
