@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public class RegisterUpload {
 
-    private static final String RSA_PRIVATE_KEY_LOC = "RSA_PRIVATE_KEY_LOC";
+    private static final String RSA_PRIVATE_KEY_LOC = "rsa.private.key.loc";
 
     //1. read private key
     //2. encrypt random string
