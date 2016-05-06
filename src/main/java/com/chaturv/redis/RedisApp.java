@@ -31,10 +31,4 @@ public class RedisApp {
         return template;
     }
 
-    @Bean
-    CommandLineRunner init() {
-        return args -> {
-            SomeStaticClass.register(redisTemplate());
-        };
-    }
 }
