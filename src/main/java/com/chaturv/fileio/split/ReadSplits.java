@@ -35,11 +35,17 @@ public class ReadSplits {
 
     public static void main(String[] args) throws IOException {
         List<String> splitNames = new ArrayList<String>();
-        for (int i = 0; i < 12; i++) {
-            splitNames.add("C:/Work/data/upload/Five-C-s-of-Cinematography_pdf-" + i);
+//        for (int i = 0; i < 12; i++) {
+//            splitNames.add("C:/Work/data/upload/Five-C-s-of-Cinematography_pdf-" + i);
+//        }
+
+        for (int i = 0; i < 45; i++) {
+            splitNames.add("/home/vineet/work/data/upload_test/ideaIC-15.0.2.tar.gz-" + i);
         }
 
-        new ReadSplits().readSplits(splitNames, "C:/Work/data/upload/Five-C-s-of-Cinematography_copy.pdf");
+//        new ReadSplits().readSplits(splitNames, "C:/Work/data/upload/Five-C-s-of-Cinematography_copy.pdf");
+        new ReadSplits().readSplits(splitNames, "/home/vineet/work/data/upload_test/ideaIC-15.0.2_COPY.tar.gz");
+
     }
 }
 

@@ -23,7 +23,7 @@ public class PartsUploader {
                 (hostname, sslSession) -> hostname.equals("localhost"));
     }
 
-//    private String URL_TEMPLATE = "http://localhost:8080/upload?uploadID=%s&fileName=%s";
+    //    private String URL_TEMPLATE = "http://localhost:8080/upload?uploadID=%s&fileName=%s";
     private String URL_TEMPLATE = "https://localhost:8443/upload?uploadID=%s&fileName=%s";
 
     private RestTemplate template;
@@ -61,8 +61,15 @@ public class PartsUploader {
 //
 //        new PartsUploader().uploadParts(splits, UUID.randomUUID().toString());
 
-        splits.add(Paths.get("/home/vineet/work/data/file.csv"));
+
+        for (int i = 0; i < 45; i++) {
+            splits.add(Paths.get("/home/vineet/work/data/ideaIC-15.0.2.tar.gz-" + i));
+        }
+
         new PartsUploader().uploadParts(splits, UUID.randomUUID().toString());
+
+//        splits.add(Paths.get("/home/vineet/work/data/file.csv"));
+//        new PartsUploader().uploadParts(splits, UUID.randomUUID().toString());
 
     }
 }
