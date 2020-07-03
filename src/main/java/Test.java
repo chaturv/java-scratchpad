@@ -1,57 +1,33 @@
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Test {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-        LinkedList<Integer> list = new LinkedList<Integer>();
-        list.add(1);
-        list.add(2);
-        list.add(3);
-        list.add(4);
-        list.add(5);
-        list.add(5);
+    static Set<Integer> QUANTITIES = Stream.of(5, 10, 15).collect(Collectors.toSet());
+    static ArrayList<List<Integer>> collect = new ArrayList<>();
 
-        //System.out.println(list);
-        Random rnd = new Random();
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
 
-        int i = 0;
-        while (i < 5) {
-            int nextInt = rnd.nextInt(20);
-            System.out.println(nextInt);
-            i++;
+        findCombinations(QUANTITIES, 2, new ArrayList<>());
+        collect.forEach(System.out::println);
+    }
+
+    private static void findCombinations(Set<Integer> quantities, Integer n, List<Integer> sol) {
+        if (sol.size() == n) { //stop condition for the recursion
+            //System.out.println(sol);
+            collect.add(new ArrayList<>(sol));
+            return;
         }
-
-        int frequency = Collections.frequency(list, 5);
-        System.out.println("--");
-        System.out.println(frequency);
-
-        System.out.println(Collections.disjoint(list, Arrays.asList(11,12)));
-
-
-//        ListIterator<Integer> listIterator = list.listIterator();
-//        while (listIterator.hasNext()) {
-//            Integer next = listIterator.next();
-//            if (next == 4) {
-//                listIterator.previous();
-//                listIterator.add(3);
-//                break;
-//            }
-//        }
-//
-//        ListIterator<Integer> listIterator = list.listIterator(list.size());
-//        while (listIterator.hasPrevious()) {
-//            Integer previous = listIterator.previous();
-//            if (previous == 4) {
-//                listIterator.add(3);
-//                break;
-//            }
-//        }
-
-
-        //System.out.println(list);
+        for (Integer quantity : quantities) {
+            sol.add(quantity);
+            findCombinations(quantities, n, sol); //recursive call
+            sol.remove(sol.size() - 1); //cleaning up environment
+        }
     }
 }
