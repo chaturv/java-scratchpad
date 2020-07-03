@@ -17,7 +17,14 @@ import java.util.UUID;
 
 public class PartsUploader {
 
-    private String URL_TEMPLATE = "http://localhost:8080/upload?uploadID=%s&fileName=%s";
+    static {
+        //for localhost testing only
+        javax.net.ssl.HttpsURLConnection.setDefaultHostnameVerifier(
+                (hostname, sslSession) -> hostname.equals("localhost"));
+    }
+
+    //    private String URL_TEMPLATE = "http://localhost:8080/upload?uploadID=%s&fileName=%s";
+    private String URL_TEMPLATE = "https://localhost:8443/upload?uploadID=%s&fileName=%s";
 
     private RestTemplate template;
 
@@ -48,10 +55,21 @@ public class PartsUploader {
 
     public static void main(String[] args) {
         List<Path> splits = new ArrayList<>();
-        for (int i = 0; i < 12; i++) {
-            splits.add(Paths.get("C:/Work/data/Five-C-s-of-Cinematography.pdf-" + i));
+//        for (int i = 0; i < 12; i++) {
+//            splits.add(Paths.get("C:/Work/data/Five-C-s-of-Cinematography.pdf-" + i));
+//        }
+//
+//        new PartsUploader().uploadParts(splits, UUID.randomUUID().toString());
+
+
+        for (int i = 0; i < 45; i++) {
+            splits.add(Paths.get("/home/vineet/work/data/ideaIC-15.0.2.tar.gz-" + i));
         }
 
         new PartsUploader().uploadParts(splits, UUID.randomUUID().toString());
+
+//        splits.add(Paths.get("/home/vineet/work/data/file.csv"));
+//        new PartsUploader().uploadParts(splits, UUID.randomUUID().toString());
+
     }
 }

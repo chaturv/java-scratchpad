@@ -49,7 +49,8 @@ public class SplitFile {
     }
 
     public static void main(String[] args) throws IOException {
-        new SplitFile().split("C:/Work/data/Five-C-s-of-Cinematography.pdf");
+//        new SplitFile().split("C:/Work/data/Five-C-s-of-Cinematography.pdf");
+        new SplitFile().split("/home/vineet/work/data/ideaIC-15.0.2.tar.gz");
         //59.9 MB (62,851,160 bytes)
         //59.9 MB (62,853,120 bytes)
 

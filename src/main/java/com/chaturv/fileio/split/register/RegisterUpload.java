@@ -10,6 +10,12 @@ public class RegisterUpload {
 
     private static final String RSA_PRIVATE_KEY_LOC = "rsa.private.key.loc";
 
+    static {
+        //for localhost testing only
+        javax.net.ssl.HttpsURLConnection.setDefaultHostnameVerifier(
+                (hostname, sslSession) -> hostname.equals("localhost"));
+    }
+
     //1. read private key
     //2. encrypt random string
     //3. send request with encrypted string
@@ -26,7 +32,7 @@ public class RegisterUpload {
     }
 
     public RegistrationStatus register(String fileName) {
-        String url = "http://localhost:8080/registerUpload?fileName=%s"; //TODO: send string encrypted with private key
+        String url = "https://localhost:8443/registerUpload?fileName=%s"; //TODO: send string encrypted with private key
 
         String random = UUID.randomUUID().toString();
         String encrypted = ""; //TODO: encrypt using private key
